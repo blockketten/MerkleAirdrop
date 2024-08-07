@@ -6,6 +6,7 @@ import {SafeERC20, IERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeE
 import {MerkleProof} from "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 import {EIP712} from "@openzeppelin/contracts/utils/cryptography/EIP712.sol";
 import {ECDSA} from "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+import {console} from "forge-std/Script.sol";
 
 contract MerkleAirdrop is EIP712 {
     using SafeERC20 for IERC20;
@@ -54,7 +55,7 @@ contract MerkleAirdrop is EIP712 {
     constructor(
         bytes32 merkleRoot,
         IERC20 airdropToken
-    ) EIP712("MerkleAirdrop", "1") {
+    ) EIP712("MerkleAirdrop", "1.0.0") {
         i_merkleRoot = merkleRoot;
         i_airdropToken = airdropToken;
     }
@@ -92,7 +93,17 @@ contract MerkleAirdrop is EIP712 {
 
         s_hasClaimed[account] = true; // prevent double claiming
         emit Claimed(account, amount);
+        console.log(
+            "Claiming account and balance before claim: ",
+            account,
+            amount
+        );
         i_airdropToken.safeTransfer(account, amount);
+        console.log(
+            "Claiming account and balance after claim: ",
+            account,
+            amount
+        );
     }
 
     /*//////////////////////////////////////////////////////////////
@@ -107,6 +118,8 @@ contract MerkleAirdrop is EIP712 {
         bytes32 s
     ) internal pure returns (bool) {
         (address actualSigner, , ) = ECDSA.tryRecover(digest, v, r, s);
+        console.log("actualSigner: ", actualSigner);
+        console.log("account: ", account);
         return actualSigner == account;
     }
 

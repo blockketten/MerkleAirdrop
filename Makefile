@@ -7,8 +7,8 @@ DEFAULT_ANVIL_KEY_2 := 0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603
 DEFAULT_ANVIL_ADDRESS := 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
 DEFAULT_ANVIL_ADDRESS_2 := 0x70997970C51812dc3A010C7d01b50e0d17dc79C8
 
-AIRDROP_ADDRESS := 0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512
-TOKEN_ADDRESS := 0x5FbDB2315678afecb367f032d93F642f64180aa3
+AIRDROP_ADDRESS := 0xa85233C63b9Ee964Add6F2cffe00Fd84eb32338f #make sure to update this at deployment
+TOKEN_ADDRESS := 0x322813Fd9A801c5507c9de605d63CEA4f2CE6c44 #make sure to update this at deployment
 
 # zkSync constants
 
@@ -73,7 +73,7 @@ sign :;
 	@cast wallet sign --no-hash --private-key $(DEFAULT_ANVIL_KEY) ${shell cast call ${AIRDROP_ADDRESS} "getMessageHash(address,uint256)" ${DEFAULT_ANVIL_ADDRESS} ${AIRDROP_AMOUNT} --rpc-url http://localhost:8545}
 
 claim:;
-	@forge script script/Interact.s.sol:ClaimAirdrop --sender ${DEFAULT_ANVIL_ADDRESS_2} --rpc-url http://localhost:8545 --private-key $(DEFAULT_ANVIL_KEY_2) --broadcast
+	@forge script script/Interactions.s.sol:ClaimAirdrop --sender ${DEFAULT_ANVIL_ADDRESS_2} --rpc-url http://localhost:8545 --private-key $(DEFAULT_ANVIL_KEY_2) --broadcast
 
 balance :; 
-	@cast --to-dec ${shell cast call ${TOKEN_ADDRESS} "balanceOf(address)" ${DEFAULT_ANVIL_ADDRESS} --rpc-url http://localhost:8545}
+	@cast --to-dec ${shell cast call ${TOKEN_ADDRESS} "balanceOf(address)" ${DEFAULT_ANVIL_ADDRESS} --rpc-url http://localhost:8545} 
