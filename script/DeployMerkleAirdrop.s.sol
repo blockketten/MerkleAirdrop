@@ -19,8 +19,8 @@ contract DeployMerkleAirdrop is Script {
             s_merkleRoot,
             IERC20(address(token))
         );
-        token.mint(token.owner(), s_amountToTransfer);
-        IERC20(token).transfer(address(airdrop), s_amountToTransfer);
+        token.mint(msg.sender, s_amountToTransfer);
+        token.transfer(address(airdrop), s_amountToTransfer);
         vm.stopBroadcast();
         return (airdrop, token);
     }

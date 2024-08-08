@@ -17,7 +17,7 @@ contract ClaimAirdrop is Script {
         0xe5ebd1e1b5a5478a944ecab36a9a954ac3b6b8216875f6524caa7a1d87096576;
     bytes32[] private proof = [PROOF1, PROOF2];
     bytes SIGNATURE =
-        hex"97b591bcb9691817f24a7e8fb250f7e04c1d14ef0a73079362503293d23f59d9799c0d8166b15ccb2688c2d9431b1b8f9ff8268f08fad5b68f107e7ec46e33681b"; // this is the v, r, s signature. The first 32 bytes are r, the next 32 are s, and the final byte is v
+        hex"e5166eb6391c463d791df68820404d18aabef21abea2c83fd875aaf0c64daf03387a274ffa2c29c3675c5a999adf7e9e24667167e4c954adfc4e87c9b5c83f511c"; // this is the v, r, s signature. The first 32 bytes are r, the next 32 are s, and the final byte is v
 
     function run() external {
         address mostRecentlyDeployed = DevOpsTools.get_most_recent_deployment(
