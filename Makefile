@@ -10,12 +10,6 @@ DEFAULT_ANVIL_ADDRESS_2 := 0x70997970C51812dc3A010C7d01b50e0d17dc79C8
 AIRDROP_ADDRESS := 0xc5a5C42992dECbae36851359345FE25997F5C42d #make sure to update this at deployment
 TOKEN_ADDRESS := 0x09635F643e140090A9A8Dcd712eD6285858ceBef #make sure to update this at deployment
 
-# zkSync constants
-
-ROOT := 0x474d994c58e37b12085fdb7bc6bbcd046cf1907b90de3b7fb083cf3636c8ebfb
-PROOF_1 := 0xd1445c931158119b00449ffcac3c947d028c0c359c34a6646d95962b3b55c6ad
-PROOF_2 := 0x46f4c7c1c21e8a90c03949beda51d2d02d1ec75b55dd97a999d3edbafa5a1e2f
-AIRDROP_AMOUNT := 25000000000000000000
 
 help:
 	@echo "Usage:"
@@ -31,7 +25,7 @@ clean  :; forge clean
 # Remove modules
 remove :; rm -rf .gitmodules && rm -rf .git/modules/* && rm -rf lib && touch .gitmodules && git add . && git commit -m "modules"
 
-install :; forge install
+install :; forge install cyfrin/foundry-devops@0.1.0 --no-commit && forge install dmfxyz/murky --no-commit && forge install openzeppelin/openzeppelin-contracts@v5.0.2 --no-commit
 
 # Update Dependencies
 update:; forge update
